@@ -23,7 +23,8 @@ await server.start();
 console.log('server live 3001'); 
     }) 
 } 
-function Testing(){
-    return 0;
+function TESTING(){
+    return 1;
 }
+TESTING();
 StartServer(); 
