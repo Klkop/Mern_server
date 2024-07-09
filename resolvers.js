@@ -3,6 +3,9 @@ const resolvers = {
     Query: {
       getUsers: async (_, { id }) => {
         return await User.findById(id);
+      },
+      getAllUsers: async () => {
+        return await User.find();
       }
     },
     Mutation: {
