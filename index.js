@@ -12,8 +12,8 @@ const url= 'mongodb+srv://123456:40448283@cluster0.6zz6kvz.mongodb.net/?retryWri
 app.use(cors()); 
 app.use(express.json())//parsing 
 mongoose.connect(url,{useNewUrlParser:true, 
-useUnifiedTopology:true}).then(()=>{console.log('DB connected')}) 
-.catch((err)=>{console.log(err)}); 
+useUnifiedTopology:true}).then(()=>{}) 
+.catch((err)=>{}); 
 const server = new ApolloServer({typeDefs,resolvers}); 
 app.use('/users',userApiFromRouter); //api 
 async function  StartServer(){ 
@@ -23,8 +23,5 @@ await server.start();
 console.log('server live 3001'); 
     }) 
 } 
-function TESTING(){
-    return 1;
-}
-TESTING();
-StartServer(); 
+StartServer();
+module.exports=app;

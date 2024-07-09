@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "serve": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon index.js",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -16,9 +16,15 @@
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "graphql-tools": "^9.0.1",
+    "just": "^0.1.8",
     "mongodb": "^6.8.0",
     "mongoose": "^8.4.4",
+    "node-fetch": "^3.3.2",
     "nodemon": "^3.1.4",
     "superagent": "^9.0.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
   }
 }
