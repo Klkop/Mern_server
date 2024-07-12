@@ -1,7 +1,9 @@
-//this is my Mongodb Schema /model/userSchema.js
 const mongoose = require('mongoose');
-const authorModel= mongoose.Schema({
-    name:{type:String,required:true}, 
-    email:{type:String,required:true},
-    password:{type:String,required:true}})
-module.exports= mongoose.model('author',authorModel);
+
+const authorSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+});
+
+module.exports = mongoose.model('author', authorSchema);
