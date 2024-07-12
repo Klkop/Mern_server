@@ -1,44 +1,45 @@
-const User=require('./model/authorModel')
+const User = require('./model/authorModel');
 const resolvers = {
-    Query: {
-      getUsers: async (_, { id }) => {
-        return await User.findById(id);
-      },
-      getAllUsers: async () => {
-        return await User.find();
+  Query: {
+    getUser: async (_, { id }) => {
+      return await User.findById(id);
+    },
+    getUsers: async () => {
+      return await User.find();
+    },
+  },
+  Mutation: {
+    createUser: async (_, { input }) => {
+      const { name, email, password } = input;
+      if (!name || !email || !password) {
+        throw new Error("Please enter all the fields");
+      }
+
+      try {
+        const newUser = new User({ name, email, password });
+        return await newUser.save();
+      } catch (err) {
+        throw new Error(`Error Creating User: ${err}`);
       }
     },
-    Mutation: {
-      createUser: async (_, { input }) => {
-        try {
-          const { name, email, password } = input;
-          if (!name || !email || !password) {
-            throw new Error("Enter all the fields");
-          }
-          const newUser = new User({ name, email, password });
-          return await newUser.save();
-        } catch (err) {
-          throw new Error(err);
+    changePassword: async (_, { id, password }) => {
+      try {
+        const user = await User.findByIdAndUpdate(
+          id,
+          { password },
+          { new: true }
+        );
+
+        if (!user) {
+          throw new Error("User not found");
         }
-      },
-      changePass: async (_, { id, password }) => {
-        try {
-          const usernew = await User.findByIdAndUpdate(id, { password: password }, { new: true });
-          if (!usernew) {
-            throw new Error("User not found");
-          }
-          console.log(usernew);
-          return usernew;
-        } catch (err) {
-          throw new Error(err);
-        }
+
+        return user;
+      } catch (err) {
+        throw new Error(`Error Occurred: ${err}`);
       }
     },
-    User: {
-      name: (parent) => parent.name || '',
-      email: (parent) => parent.email || '',
-      password: (parent) => parent.password || ''
-    }
-  };
-  
-  module.exports = resolvers;
+  },
+};
+
+module.exports = resolvers;
